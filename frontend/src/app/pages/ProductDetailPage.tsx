@@ -1,0 +1,686 @@
+import {
+  ArrowLeft,
+  BadgeCheck,
+  ExternalLink,
+  Leaf,
+  MapPin,
+  MessageCircle,
+  Navigation,
+  Star,
+  Truck,
+} from "lucide-react";
+import { useEffect, useMemo, useState } from "react";
+import { useAuth } from "../auth/AuthContext";
+import { useCart } from "../context/CartContext";
+import { AgrivoNavbar } from "../components/AgrivoNavbar";
+import { HarvestListingCard } from "../components/harvest/HarvestListingCard";
+import { ProductSaveButton } from "../components/products/ProductSaveButton";
+import { ProductAddToCartButton } from "../components/products/ProductAddToCartButton";
+import { ProductVarietyBadge } from "../components/products/ProductVarietyBadge";
+import { ProductImage } from "../components/products/ProductImage";
+import { ImageWithFallback } from "../components/figma/ImageWithFallback";
+import { Button } from "../components/ui/button";
+import {
+  buildMarketplaceProductDetail,
+  type MarketplaceProductDetail,
+} from "../data/marketplaceProducts";
+import {
+  getProductBySlug,
+  getProductDetailHash,
+  getSimilarProducts,
+  type HarvestListing,
+} from "../data/harvestExplorer";
+import { districtShortName } from "../data/harvestExplorerUtils";
+import {
+  buildGoogleMapsEmbedUrl,
+  buildOriginLocationQuery,
+  openGoogleMapsSearch,
+} from "../utils/googleMaps";
+import { buildWhatsAppUrl } from "../utils/whatsapp";
+import { isApiMode } from "../../config/dataMode";
+import { getProductById, getProducts, type ApiProduct } from "../../api/productsApi";
+
+interface ProductDetailPageProps {
+  slug: string;
+}
+
+function navigate(hash: string) {
+  window.location.hash = hash;
+}
+
+function ProductOriginPreview({ product }: { product: MarketplaceProductDetail }) {
+  const villageLabel = product.village || districtShortName(product.district);
+  const districtLabel = districtShortName(product.district);
+  const originQuery = useMemo(
+    () =>
+      buildOriginLocationQuery({
+        farmer: product.farmer,
+        village: product.village,
+        district: product.district,
+      }),
+    [product.farmer, product.village, product.district],
+  );
+  const embedUrl = useMemo(() => buildGoogleMapsEmbedUrl(originQuery), [originQuery]);
+  const [mapStatus, setMapStatus] = useState<"loading" | "ready" | "error">("loading");
+
+  useEffect(() => {
+    setMapStatus("loading");
+    const timeout = window.setTimeout(() => {
+      setMapStatus((current) => (current === "loading" ? "error" : current));
+    }, 10000);
+    return () => window.clearTimeout(timeout);
+  }, [embedUrl]);
+
+  const handleOpenMaps = () => {
+    openGoogleMapsSearch(originQuery);
+  };
+
+  return (
+    <div className="agrivo-product-origin">
+      <div className="agrivo-product-origin-map">
+        {mapStatus !== "error" ? (
+          <iframe
+            key={embedUrl}
+            title={`Origin map for ${product.farmer}`}
+            src={embedUrl}
+            className="agrivo-product-origin-map__iframe"
+            loading="lazy"
+            referrerPolicy="no-referrer-when-downgrade"
+            allowFullScreen
+            onLoad={() => setMapStatus("ready")}
+          />
+        ) : (
+          <div className="agrivo-product-origin-map__fallback">
+            <MapPin className="h-8 w-8 text-[#43A047]" />
+            <p className="mt-3 text-sm font-semibold text-[#102018]">Map preview unavailable</p>
+            <p className="mt-1 text-sm text-[#5F6F64]">Open this location in Google Maps.</p>
+            <Button
+              variant="outline"
+              size="sm"
+              className="mt-4 rounded-full border-[#dbe7d4] text-[#14532D] hover:bg-[#EAF7EC]"
+              onClick={handleOpenMaps}
+            >
+              <ExternalLink className="mr-2 h-4 w-4" />
+              Open in Google Maps
+            </Button>
+          </div>
+        )}
+
+        {mapStatus === "loading" ? (
+          <div className="agrivo-product-origin-map__loading" aria-hidden="true">
+            <span className="agrivo-product-origin-map__loading-pulse" />
+          </div>
+        ) : null}
+
+        {mapStatus !== "error" ? (
+          <div className="agrivo-product-origin-map__overlay">
+            <p className="text-[10px] font-semibold uppercase tracking-wide text-[#6b7a70]">Origin farm</p>
+            <p className="mt-0.5 flex items-center gap-1 text-sm font-bold text-[#102018]">
+              <MapPin className="h-3.5 w-3.5 shrink-0 text-[#43A047]" />
+              <span className="truncate">{villageLabel}</span>
+            </p>
+          </div>
+        ) : null}
+      </div>
+
+      <div className="agrivo-product-origin-meta">
+        <div className="agrivo-product-origin-meta-item">
+          <p className="text-[10px] font-semibold uppercase tracking-wide text-[#6b7a70]">Economic region</p>
+          <p className="mt-1 text-sm font-semibold text-[#102018]">{product.economicRegion}</p>
+        </div>
+        <div className="agrivo-product-origin-meta-item">
+          <p className="text-[10px] font-semibold uppercase tracking-wide text-[#6b7a70]">District</p>
+          <p className="mt-1 text-sm font-semibold text-[#102018]">{districtLabel}</p>
+        </div>
+        <div className="agrivo-product-origin-meta-item">
+          <p className="text-[10px] font-semibold uppercase tracking-wide text-[#6b7a70]">Village</p>
+          <p className="mt-1 text-sm font-semibold text-[#102018]">{villageLabel}</p>
+        </div>
+      </div>
+
+      <p className="agrivo-product-origin-farm-line">
+        <Leaf className="h-3.5 w-3.5 shrink-0 text-[#43A047]" />
+        <span>
+          {product.farmer}, {districtLabel}, Azerbaijan
+        </span>
+      </p>
+
+      <Button
+        variant="outline"
+        className="mt-4 w-full rounded-full border-[#dbe7d4] text-[#14532D] hover:bg-[#EAF7EC] sm:w-auto"
+        onClick={handleOpenMaps}
+      >
+        <ExternalLink className="mr-2 h-4 w-4" />
+        Open in Google Maps
+      </Button>
+    </div>
+  );
+}
+
+function DetailField({ label, value }: { label: string; value: string }) {
+  return (
+    <div className="agrivo-product-detail-field">
+      <dt className="text-xs font-medium uppercase tracking-wide text-[#6b7a70]">{label}</dt>
+      <dd className="mt-0.5 text-sm font-semibold text-[#102018]">{value}</dd>
+    </div>
+  );
+}
+
+function ProductNotFound() {
+  return (
+    <div className="agrivo-shell agrivo-product-detail-page min-h-screen overflow-x-hidden bg-[#f8faf4]">
+      <AgrivoNavbar activeItem="marketplace" />
+      <div className="agrivo-header-spacer" aria-hidden="true" />
+      <div className="agrivo-container py-16 text-center">
+        <h1 className="agrivo-heading text-2xl font-bold text-[#102018]">Product not found</h1>
+        <p className="mt-3 text-[#5F6F64]">We could not find this product.</p>
+        <Button
+          className="mt-6 rounded-full bg-[#14532D] text-white hover:bg-[#1D6A3B]"
+          onClick={() => navigate("products")}
+        >
+          Back to Marketplace
+        </Button>
+      </div>
+    </div>
+  );
+}
+
+function ProductLoading() {
+  return (
+    <div className="agrivo-shell agrivo-product-detail-page min-h-screen overflow-x-hidden bg-[#f8faf4]">
+      <AgrivoNavbar activeItem="marketplace" />
+      <div className="agrivo-header-spacer" aria-hidden="true" />
+      <div className="agrivo-container py-16 text-center">
+        <h1 className="agrivo-heading text-2xl font-bold text-[#102018]">Loading product...</h1>
+      </div>
+    </div>
+  );
+}
+
+function ProductLoadError({ message }: { message: string }) {
+  return (
+    <div className="agrivo-shell agrivo-product-detail-page min-h-screen overflow-x-hidden bg-[#f8faf4]">
+      <AgrivoNavbar activeItem="marketplace" />
+      <div className="agrivo-header-spacer" aria-hidden="true" />
+      <div className="agrivo-container py-16 text-center">
+        <h1 className="agrivo-heading text-2xl font-bold text-[#102018]">Unable to load product</h1>
+        <p className="mt-3 text-[#5F6F64]">{message}</p>
+        <Button
+          className="mt-6 rounded-full bg-[#14532D] text-white hover:bg-[#1D6A3B]"
+          onClick={() => navigate("products")}
+        >
+          Back to Marketplace
+        </Button>
+      </div>
+    </div>
+  );
+}
+
+function SimilarProducts({ products }: { products: HarvestListing[] }) {
+  if (products.length === 0) return null;
+
+  return (
+    <section className="agrivo-product-detail-section">
+      <h2 className="agrivo-heading text-xl font-bold text-[#102018] sm:text-2xl">Similar Products</h2>
+      <p className="mt-2 text-sm text-[#5F6F64]">
+        More fresh supply from the same category and region.
+      </p>
+      <div className="agrivo-product-detail-similar-grid mt-6">
+        {products.map((listing) => (
+          <HarvestListingCard
+            key={listing.id}
+            listing={listing}
+            compact
+            onViewDetails={() => navigate(getProductDetailHash(listing.slug))}
+            onContactSeller={() => {
+              if (listing.farmerSlug) {
+                navigate(`farmers/${listing.farmerSlug}`);
+              } else {
+                navigate("login");
+              }
+            }}
+          />
+        ))}
+      </div>
+    </section>
+  );
+}
+
+function ProductDetailContent({
+  product,
+  similarProducts,
+}: {
+  product: MarketplaceProductDetail;
+  similarProducts: HarvestListing[];
+}) {
+  const { user, isAuthenticated } = useAuth();
+  const { cartCount } = useCart();
+  const isBuyer = isAuthenticated && user?.role === "buyer";
+  const isFarmer = isAuthenticated && user?.role === "farmer";
+  const whatsappUrl = product.farmerWhatsapp
+    ? buildWhatsAppUrl(product.farmerWhatsapp, product.farmerDisplayName)
+    : null;
+
+  const handleContactSeller = () => {
+    if (whatsappUrl) {
+      window.open(whatsappUrl, "_blank", "noopener,noreferrer");
+      return;
+    }
+    navigate("login");
+  };
+
+  return (
+    <div className="agrivo-shell agrivo-product-detail-page min-h-screen overflow-x-hidden bg-[#f8faf4]">
+      <AgrivoNavbar activeItem="marketplace" />
+      <div className="agrivo-header-spacer" aria-hidden="true" />
+
+      <div className="agrivo-container pb-16 pt-6">
+        <button
+          type="button"
+          className="agrivo-product-detail-back"
+          onClick={() => navigate("products")}
+        >
+          <ArrowLeft className="h-4 w-4" />
+          Back to Marketplace
+        </button>
+
+        <section className="agrivo-product-detail-hero agrivo-dashboard-panel mt-4">
+          <div className="agrivo-product-detail-hero-grid">
+            <div className="agrivo-product-detail-image-wrap">
+              <ProductImage
+                name={product.name}
+                src={product.image}
+                category={product.productType}
+                alt={`${product.name} product image`}
+                className="min-h-[280px] h-full w-full"
+              />
+              <ProductSaveButton slug={product.slug} className="agrivo-product-save-btn--overlay" />
+            </div>
+
+            <div className="agrivo-product-detail-hero-panel">
+              <span className="agrivo-product-badge inline-flex rounded-full border border-[#bbf7d0] bg-[#ecfdf5] px-3 py-1 text-xs font-semibold text-[#166534]">
+                {product.badge}
+              </span>
+
+              <h1 className="agrivo-heading mt-3 text-3xl font-bold text-[#102018] sm:text-4xl">
+                {product.name}
+              </h1>
+
+              <ProductVarietyBadge
+                variety={product.variety}
+                label="Variety"
+                size="md"
+                className="mt-2"
+              />
+
+              <p className="mt-2 flex items-start gap-1.5 text-sm text-[#5F6F64]">
+                <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-[#43A047]" />
+                {product.locationPath}
+              </p>
+
+              <div className="mt-4">
+                <p className="text-sm text-[#5F6F64]">
+                  Farmer: <span className="font-semibold text-[#102018]">{product.farmer}</span>
+                </p>
+                {product.farmerVerified ? (
+                  <p className="mt-1 flex items-center gap-1 text-xs font-semibold text-[#166534]">
+                    <BadgeCheck className="h-3.5 w-3.5" />
+                    Verified Farmer
+                  </p>
+                ) : null}
+              </div>
+
+              <div className="agrivo-product-detail-price-row mt-5">
+                <p className="agrivo-heading text-2xl font-bold text-[#14532D] sm:text-3xl">
+                  {product.priceDisplay}
+                </p>
+              </div>
+
+              <div className="agrivo-product-detail-quick-meta mt-4 grid grid-cols-2 gap-3">
+                <div className="agrivo-product-detail-quick-stat">
+                  <p className="text-xs font-medium uppercase tracking-wide text-[#6b7a70]">
+                    Available quantity
+                  </p>
+                  <p className="mt-1 text-sm font-semibold text-[#102018]">{product.quantity}</p>
+                </div>
+                <div className="agrivo-product-detail-quick-stat">
+                  <p className="text-xs font-medium uppercase tracking-wide text-[#6b7a70]">Harvested</p>
+                  <p className="mt-1 text-sm font-semibold text-[#102018]">{product.harvestDate}</p>
+                </div>
+                <div className="agrivo-product-detail-quick-stat col-span-2">
+                  <p className="text-xs font-medium uppercase tracking-wide text-[#6b7a70]">
+                    Delivery availability
+                  </p>
+                  <p className="mt-1 text-sm font-semibold text-[#102018]">
+                    {product.deliveryAvailable ? "Delivery available" : "Pickup only"}
+                  </p>
+                </div>
+              </div>
+
+              {cartCount > 0 ? (
+                <p className="mt-4 rounded-xl border border-[#bbf7d0] bg-[#ecfdf5] px-3 py-2 text-sm font-medium text-[#166534]">
+                  Cart ({cartCount} item{cartCount === 1 ? "" : "s"})
+                </p>
+              ) : null}
+
+              <div className="agrivo-product-detail-actions mt-6 flex flex-col gap-2 sm:flex-row sm:flex-wrap">
+                {isBuyer ? (
+                  <>
+                    <ProductAddToCartButton
+                      slug={product.slug}
+                      className="agrivo-button-soft h-11 rounded-full bg-[#14532D] text-sm font-semibold text-white hover:bg-[#1D6A3B] sm:flex-1"
+                      label="Add to Cart"
+                    />
+                    <Button
+                      variant="outline"
+                      className="rounded-full border-[#dbe7d4] text-[#14532D] hover:bg-[#EAF7EC] sm:flex-1"
+                      onClick={() => navigate("dashboard/buyer/cart")}
+                    >
+                      Order Now
+                    </Button>
+                  </>
+                ) : !isAuthenticated ? (
+                  <Button
+                    className="rounded-full bg-[#14532D] text-white hover:bg-[#1D6A3B] sm:flex-1"
+                    onClick={() => navigate("login")}
+                  >
+                    Login to Order
+                  </Button>
+                ) : isFarmer ? (
+                  <Button
+                    variant="outline"
+                    className="rounded-full border-[#dbe7d4] text-[#14532D] hover:bg-[#EAF7EC] sm:flex-1"
+                    onClick={() => navigate("dashboard/farmer")}
+                  >
+                    Go to Farmer Dashboard
+                  </Button>
+                ) : null}
+
+                <Button
+                  variant="outline"
+                  className="rounded-full border-[#dbe7d4] text-[#14532D] hover:bg-[#EAF7EC] sm:flex-1"
+                  onClick={handleContactSeller}
+                >
+                  <MessageCircle className="mr-2 h-4 w-4" />
+                  Contact Seller
+                </Button>
+
+                {product.farmerSlug ? (
+                  <Button
+                    variant="outline"
+                    className="rounded-full border-[#dbe7d4] text-[#14532D] hover:bg-[#EAF7EC] sm:flex-1"
+                    onClick={() => navigate(`farmers/${product.farmerSlug}`)}
+                  >
+                    View Farmer Profile
+                  </Button>
+                ) : null}
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <div className="agrivo-product-detail-layout mt-6">
+          <div className="agrivo-product-detail-main space-y-6">
+            <section className="agrivo-dashboard-panel">
+              <h2 className="agrivo-heading text-lg font-bold text-[#102018]">Product Details</h2>
+              {product.description ? (
+                <p className="mt-3 text-sm leading-6 text-[#5F6F64]">{product.description}</p>
+              ) : null}
+              <dl className="agrivo-product-detail-fields mt-4">
+                <DetailField label="Category" value={product.category ?? "Produce"} />
+                {product.variety ? (
+                  <DetailField label="Variety / Sort" value={product.variety} />
+                ) : null}
+                <DetailField label="Unit" value={product.unit ?? "kg"} />
+                <DetailField label="Minimum order" value={product.minimumOrder ?? "20 kg"} />
+                <DetailField label="Available quantity" value={product.quantity} />
+                <DetailField label="Price per unit" value={product.priceDisplay} />
+                <DetailField label="Harvest date" value={product.harvestDate} />
+                <DetailField label="Freshness" value={product.freshnessStatus} />
+                <DetailField label="Batch ID" value={product.batchId} />
+                <DetailField label="Storage note" value={product.storageNote} />
+                <DetailField
+                  label="Delivery"
+                  value={product.deliveryAvailable ? "Available" : "Pickup only"}
+                />
+              </dl>
+            </section>
+
+            <section className="agrivo-dashboard-panel">
+              <h2 className="agrivo-heading text-lg font-bold text-[#102018]">Product Origin</h2>
+              <p className="mt-2 flex items-center gap-2 text-sm font-semibold text-[#14532D]">
+                <MapPin className="h-4 w-4 shrink-0" />
+                {product.economicRegion} → {districtShortName(product.district)}
+                {product.village ? ` → ${product.village}` : ""}
+              </p>
+              <div className="mt-4">
+                <ProductOriginPreview product={product} />
+              </div>
+            </section>
+
+            <section className="agrivo-dashboard-panel">
+              <h2 className="agrivo-heading text-lg font-bold text-[#102018]">Delivery Information</h2>
+              <dl className="mt-4 space-y-3 text-sm">
+                <div className="flex items-start justify-between gap-4">
+                  <dt className="text-[#5F6F64]">Delivery available</dt>
+                  <dd className="font-semibold text-[#102018]">
+                    {product.deliveryAvailable ? "Yes" : "No"}
+                  </dd>
+                </div>
+                <div className="flex items-start justify-between gap-4">
+                  <dt className="text-[#5F6F64]">Estimated delivery</dt>
+                  <dd className="font-semibold text-[#102018]">{product.estimatedDelivery}</dd>
+                </div>
+                <div className="flex items-start justify-between gap-4">
+                  <dt className="text-[#5F6F64]">Logistics support</dt>
+                  <dd className="font-semibold text-[#102018]">{product.logisticsSupport}</dd>
+                </div>
+                <div className="flex items-start justify-between gap-4">
+                  <dt className="text-[#5F6F64]">Pickup from farm</dt>
+                  <dd className="font-semibold text-[#102018]">
+                    {product.pickupAvailable ? "Available" : "Not available"}
+                  </dd>
+                </div>
+              </dl>
+            </section>
+          </div>
+
+          <aside className="agrivo-product-detail-sidebar">
+            <section className="agrivo-dashboard-panel agrivo-product-detail-sidebar-card">
+              <div className="flex items-start gap-3">
+                {product.farmerProfile?.image ? (
+                  <ImageWithFallback
+                    src={product.farmerProfile.image}
+                    alt={product.farmer}
+                    className="h-14 w-14 shrink-0 rounded-full object-cover"
+                  />
+                ) : (
+                  <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-[#ecfdf5] text-lg font-bold text-[#14532D]">
+                    {product.farmer.charAt(0)}
+                  </div>
+                )}
+                <div className="min-w-0">
+                  <h3 className="agrivo-heading text-base font-bold text-[#102018]">{product.farmer}</h3>
+                  {product.farmerVerified ? (
+                    <p className="mt-1 flex items-center gap-1 text-xs font-semibold text-[#166534]">
+                      <BadgeCheck className="h-3.5 w-3.5" />
+                      Verified Farmer
+                    </p>
+                  ) : null}
+                </div>
+              </div>
+
+              <div className="mt-4 space-y-2 text-sm text-[#5F6F64]">
+                <p className="flex items-center gap-1.5">
+                  <MapPin className="h-3.5 w-3.5 text-[#43A047]" />
+                  {product.farmerProfile?.village
+                    ? `${product.farmerProfile.location}, ${product.farmerProfile.village}`
+                    : product.locationPath.split(">").slice(-2).join(",").trim()}
+                </p>
+                <p className="flex items-center gap-1.5">
+                  <Star className="h-3.5 w-3.5 fill-[#fbbf24] text-[#fbbf24]" />
+                  Rating: {product.farmerRating}
+                </p>
+                <p>Completed orders: {product.farmerCompletedOrders}</p>
+                <p>
+                  <span className="font-medium text-[#102018]">Specializes in:</span>{" "}
+                  {product.farmerSpecialization}
+                </p>
+              </div>
+
+              <div className="mt-4 flex flex-col gap-2">
+                {product.farmerSlug ? (
+                  <Button
+                    className="w-full rounded-full bg-[#14532D] text-white hover:bg-[#1D6A3B]"
+                    onClick={() => navigate(`farmers/${product.farmerSlug}`)}
+                  >
+                    View Farmer Profile
+                  </Button>
+                ) : null}
+                <Button
+                  variant="outline"
+                  className="w-full rounded-full border-[#dbe7d4] text-[#14532D] hover:bg-[#EAF7EC]"
+                  onClick={handleContactSeller}
+                >
+                  <MessageCircle className="mr-2 h-4 w-4" />
+                  Contact via WhatsApp
+                </Button>
+              </div>
+            </section>
+
+            <section className="agrivo-dashboard-panel agrivo-product-detail-logistics-card">
+              <div className="flex items-center gap-2.5">
+                <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-[#ecfdf5] border border-[#bbf7d0]">
+                  <Truck className="h-4 w-4 text-[#14532D]" />
+                </div>
+                <h3 className="agrivo-heading text-sm font-bold text-[#14532D]">Agrivo logistics ready</h3>
+              </div>
+              <p className="mt-3 text-sm leading-6 text-[#5F6F64]">
+                Verified farm supply with route visibility and delivery coordination through Agrivo.
+              </p>
+              <div className="mt-3 flex items-center gap-2 rounded-xl border border-[#edf2ea] bg-[#f8faf4] px-3 py-2 text-xs font-medium text-[#3f5247]">
+                <Navigation className="h-3.5 w-3.5 shrink-0 text-[#43A047]" />
+                {product.estimatedDelivery} estimated handoff
+              </div>
+            </section>
+          </aside>
+        </div>
+
+        <SimilarProducts products={similarProducts} />
+      </div>
+    </div>
+  );
+}
+
+export default function ProductDetailPage({ slug }: ProductDetailPageProps) {
+  const [listing, setListing] = useState<HarvestListing | null>(null);
+  const [similarListings, setSimilarListings] = useState<HarvestListing[] | null>(null);
+  const [isLoading, setIsLoading] = useState(isApiMode);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (!isApiMode) {
+      const mockListing = getProductBySlug(slug);
+      setListing(mockListing ?? null);
+      setSimilarListings(mockListing ? getSimilarProducts(mockListing) : []);
+      setErrorMessage(null);
+      setIsLoading(false);
+      return;
+    }
+
+    const cleanId = slug.startsWith("api-") ? slug.replace(/^api-/, "") : slug;
+    let active = true;
+    setIsLoading(true);
+    setErrorMessage(null);
+
+    Promise.all([getProductById(cleanId), getProducts()])
+      .then(([product, allProducts]) => {
+        if (!active) return;
+        const mapped = mapApiProductToHarvestListing(product);
+        const mappedAll = allProducts.map(mapApiProductToHarvestListing);
+        setListing(mapped);
+        setSimilarListings(getSimilarProductsFromList(mapped, mappedAll));
+      })
+      .catch((error) => {
+        if (!active) return;
+        if (error instanceof Error) {
+          setErrorMessage(error.message);
+        } else {
+          setErrorMessage("Failed to load product.");
+        }
+      })
+      .finally(() => {
+        if (active) {
+          setIsLoading(false);
+        }
+      });
+
+    return () => {
+      active = false;
+    };
+  }, [slug]);
+
+  if (isLoading) return <ProductLoading />;
+  if (errorMessage) return <ProductLoadError message={errorMessage} />;
+  if (!listing) return <ProductNotFound />;
+
+  const product = buildMarketplaceProductDetail(listing);
+  return <ProductDetailContent product={product} similarProducts={similarListings ?? []} />;
+}
+
+function mapApiProductToHarvestListing(product: ApiProduct): HarvestListing {
+  const category = product.category || "Produce";
+  const productType = category.toLowerCase().includes("fruit")
+    ? "Fruits"
+    : category.toLowerCase().includes("vegetable")
+      ? "Vegetables"
+      : category;
+
+  return {
+    id: product.id,
+    slug: product.id,
+    name: product.name,
+    productType,
+    economicRegion: (product.region || "Bakı") as HarvestListing["economicRegion"],
+    district: product.district || "Baku",
+    village: product.village || "",
+    farmer: product.farmer?.name || "Farmer",
+    farmerSlug: product.farmer?.id || null,
+    farmerVerified: true,
+    quantity: `${product.quantity} ${product.unit}`,
+    pricePerKg: `${product.price} AZN/${product.unit}`,
+    harvestDate: product.harvestDate || "This week",
+    tags: [
+      product.variety ? `Variety: ${product.variety}` : "Fresh",
+      product.isOrganic ? "Organic" : "Verified farmer",
+      product.availableNow ? "Available now" : "Pre-order",
+    ],
+    image: product.imageUrl || "",
+    deliveryAvailable: true,
+    description: product.description || undefined,
+    unit: product.unit,
+    minimumOrder: `1 ${product.unit}`,
+    category: product.category,
+    variety: product.variety || undefined,
+  };
+}
+
+function getSimilarProductsFromList(
+  listing: HarvestListing,
+  source: HarvestListing[],
+  limit = 4,
+): HarvestListing[] {
+  const scored = source
+    .filter((item) => item.id !== listing.id)
+    .map((item) => {
+      let score = 0;
+      if (item.productType === listing.productType) score += 3;
+      if (item.economicRegion === listing.economicRegion) score += 2;
+      if (item.category === listing.category) score += 1;
+      return { item, score };
+    })
+    .filter(({ score }) => score > 0)
+    .sort((a, b) => b.score - a.score);
+
+  return scored.slice(0, limit).map(({ item }) => item);
+}

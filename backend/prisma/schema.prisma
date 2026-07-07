@@ -1,0 +1,224 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum UserRole {
+  buyer
+  farmer
+  logistics
+  admin
+}
+
+enum ProductStatus {
+  active
+  draft
+  inactive
+  out_of_stock
+}
+
+enum OrderStatus {
+  pending
+  accepted
+  preparing
+  ready
+  delivered
+  cancelled
+}
+
+enum DeliveryStatus {
+  assigned
+  pickup_scheduled
+  ready_for_pickup
+  driver_assigned
+  pickup_started
+  collected
+  in_transit
+  near_destination
+  delivered
+  delayed
+  cancelled
+  issue_reported
+}
+
+enum DeliveryPriority {
+  low
+  normal
+  high
+}
+
+model User {
+  id           String   @id @default(cuid())
+  name         String
+  email        String   @unique
+  passwordHash String
+  phone        String?
+  role         UserRole
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  farmerProfile    FarmerProfile?
+  logisticsProfile LogisticsProfile?
+  products         Product[]         @relation("FarmerProducts")
+  cartItems        CartItem[]
+  buyerOrders      Order[]           @relation("BuyerOrders")
+  farmerOrders     Order[]           @relation("FarmerOrders")
+  deliveries       Delivery[]        @relation("LogisticsDeliveries")
+}
+
+model FarmerProfile {
+  id              String   @id @default(cuid())
+  userId          String   @unique
+  farmName        String?
+  ownerName       String?
+  region          String?
+  district        String?
+  village         String?
+  address         String?
+  description     String?
+  mainProducts    String?
+  mainCategories  String?
+  farmSize        String?
+  minimumOrder    String?
+  deliveryOptions String?
+  paymentMethods  String?
+  workingDays     String?
+  openingTime     String?
+  closingTime     String?
+  rating          Float    @default(0)
+  verified        Boolean  @default(false)
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model LogisticsProfile {
+  id                      String   @id @default(cuid())
+  userId                  String   @unique
+  companyName             String?
+  contactPerson           String?
+  registrationNumber      String?
+  address                 String?
+  serviceRegions          String?
+  mainRoutes              String?
+  driversCount            Int?
+  vehiclesCount           Int?
+  vehicleTypes            String?
+  maxDailyCapacity        String?
+  supportedDeliveryTypes    String?
+  coldChainSupport        Boolean  @default(false)
+  sameDayDelivery         Boolean  @default(false)
+  workingDays             String?
+  openingTime             String?
+  closingTime             String?
+  rating                  Float    @default(0)
+  verified                Boolean  @default(false)
+  createdAt               DateTime @default(now())
+  updatedAt               DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model Product {
+  id          String        @id @default(cuid())
+  farmerId    String
+  name        String
+  category    String
+  variety     String?
+  description String?
+  price       Float
+  quantity    Float
+  unit        String        @default("kg")
+  region      String?
+  district    String?
+  village     String?
+  harvestDate String?
+  imageUrl    String?
+  status      ProductStatus @default(active)
+  isOrganic   Boolean       @default(false)
+  isFresh     Boolean       @default(true)
+  availableNow Boolean      @default(true)
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+
+  farmer     User        @relation("FarmerProducts", fields: [farmerId], references: [id], onDelete: Cascade)
+  cartItems  CartItem[]
+  orderItems OrderItem[]
+}
+
+model CartItem {
+  id        String   @id @default(cuid())
+  buyerId   String
+  productId String
+  quantity  Float
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  buyer   User    @relation(fields: [buyerId], references: [id], onDelete: Cascade)
+  product Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+  @@unique([buyerId, productId])
+}
+
+model Order {
+  id              String      @id @default(cuid())
+  buyerId         String
+  farmerId        String
+  status          OrderStatus @default(pending)
+  totalAmount     Float
+  deliveryMethod  String?
+  deliveryAddress String?
+  createdAt       DateTime    @default(now())
+  updatedAt       DateTime    @updatedAt
+
+  buyer    User        @relation("BuyerOrders", fields: [buyerId], references: [id], onDelete: Cascade)
+  farmer   User        @relation("FarmerOrders", fields: [farmerId], references: [id], onDelete: Cascade)
+  items    OrderItem[]
+  delivery Delivery?
+}
+
+model OrderItem {
+  id           String @id @default(cuid())
+  orderId      String
+  productId    String?
+  productName  String
+  variety      String?
+  quantity     Float
+  unit         String
+  pricePerUnit Float
+  totalPrice   Float
+
+  order   Order    @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  product Product? @relation(fields: [productId], references: [id], onDelete: SetNull)
+}
+
+model Delivery {
+  id                 String           @id @default(cuid())
+  orderId            String           @unique
+  logisticsPartnerId String?
+  driverName         String?
+  vehicle            String?
+  pickupLocation     String?
+  dropoffLocation    String?
+  pickupTime         DateTime?
+  eta                DateTime?
+  status             DeliveryStatus   @default(assigned)
+  priority           DeliveryPriority @default(normal)
+  currentLocation    String?
+  distanceRemaining  String?
+  progress           Int              @default(0)
+  completedAt        DateTime?
+  proofStatus        String?
+  rating             Float?
+  feedback           String?
+  createdAt          DateTime         @default(now())
+  updatedAt          DateTime         @updatedAt
+
+  order            Order @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  logisticsPartner User? @relation("LogisticsDeliveries", fields: [logisticsPartnerId], references: [id], onDelete: SetNull)
+}

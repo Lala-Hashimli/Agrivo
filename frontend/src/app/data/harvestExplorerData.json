@@ -1,0 +1,1194 @@
+{
+  "source": "azerbaycan_rayon_mehsul_siyahisi.xlsx",
+  "generatedAt": "2026-07-04",
+  "districts": [
+    {
+      "economicRegion": "Abşeron-Xızı",
+      "district": "Abşeron rayonu",
+      "directionRaw": "Zeytun; üzüm; tərəvəz; bostan; quru-subtropik meyvələr",
+      "groupRaw": "meyvə/tərəvəz/bostan",
+      "rationale": "Abşeron iqtisadi rayonunda tərəvəzçilik, bostançılıq, üzümçülük və quru-subtropik meyvəçilik göstərilir.",
+      "reliability": "Yüksək",
+      "freshProducts": [
+        "Vegetables",
+        "Watermelon",
+        "Citrus"
+      ],
+      "hasFreshProduce": true
+    },
+    {
+      "economicRegion": "Abşeron-Xızı",
+      "district": "Xızı rayonu",
+      "directionRaw": "Taxıl; quru meyvəçilik; bostan-tərəvəz",
+      "groupRaw": "taxıl/meyvə/tərəvəz",
+      "rationale": "Abşeron-Xızı zonası üzrə kənd təsərrüfatı məlumatları məhduddur; Xızı üçün ümumi region ixtisaslaşması götürüldü.",
+      "reliability": "Orta",
+      "freshProducts": [
+        "Fruits",
+        "Watermelon"
+      ],
+      "hasFreshProduce": true
+    },
+    {
+      "economicRegion": "Abşeron-Xızı",
+      "district": "Sumqayıt şəhəri",
+      "directionRaw": "Kənd təsərrüfatı profili zəif; şəhər/sənaye mərkəzi",
+      "groupRaw": "-",
+      "rationale": "Şəhər tipli sənaye mərkəzidir; məşhur meyvə-tərəvəz rayonu kimi çıxmır.",
+      "reliability": "Aşağı",
+      "freshProducts": [],
+      "hasFreshProduce": false
+    },
+    {
+      "economicRegion": "Bakı",
+      "district": "Bakı şəhəri",
+      "directionRaw": "İstixana tərəvəzi; Abşeron zeytunu və quru-subtropik məhsullar",
+      "groupRaw": "tərəvəz/meyvə",
+      "rationale": "Bakı/Abşeron üzrə tərəvəz istehsalı və Abşeron zonası üzrə quru-subtropik meyvəçilik qeyd olunur.",
+      "reliability": "Orta",
+      "freshProducts": [
+        "Vegetables",
+        "Citrus"
+      ],
+      "hasFreshProduce": true
+    },
+    {
+      "economicRegion": "Quba-Xaçmaz",
+      "district": "Quba rayonu",
+      "directionRaw": "Alma; armud; gilas; gavalı; fındıq; qoz",
+      "groupRaw": "meyvə",
+      "rationale": "Quba-Xaçmazda meyvəçilik əsas ixtisaslaşmadır; Quba alma ilə tanınır.",
+      "reliability": "Yüksək",
+      "freshProducts": [
+        "Apple",
+        "Pear",
+        "Cherry"
+      ],
+      "hasFreshProduce": true
+    },
+    {
+      "economicRegion": "Quba-Xaçmaz",
+      "district": "Qusar rayonu",
+      "directionRaw": "Alma; meyvə; tərəvəz; kartof; fındıq",
+      "groupRaw": "meyvə/tərəvəz/kartof",
+      "rationale": "Quba-Xaçmazda Qusar meyvə və tərəvəz yığımında fərqlənir; Qusarda kartof və fındıq da qeyd olunur.",
+      "reliability": "Yüksək",
+      "freshProducts": [
+        "Apple",
+        "Fruits",
+        "Vegetables",
+        "Potato"
+      ],
+      "hasFreshProduce": true
+    },
+    {
+      "economicRegion": "Quba-Xaçmaz",
+      "district": "Xaçmaz rayonu",
+      "directionRaw": "Tərəvəz; meyvə; fındıq; üzüm",
+      "groupRaw": "tərəvəz/meyvə",
+      "rationale": "Xaçmaz ölkənin iri tərəvəz, taxıl və meyvə yetişdirən rayonlarından biri kimi göstərilir; fındıq bağları da böyükdür.",
+      "reliability": "Yüksək",
+      "freshProducts": [
+        "Vegetables",
+        "Fruits"
+      ],
+      "hasFreshProduce": true
+    },
+    {
+      "economicRegion": "Quba-Xaçmaz",
+      "district": "Şabran rayonu",
+      "directionRaw": "Üzüm; taxıl; tərəvəz; meyvə",
+      "groupRaw": "üzüm/tərəvəz",
+      "rationale": "Quba-Xaçmaz mənbəsində Şabran üzrə üzüm qeyd olunur; regionda tərəvəzçilik və meyvəçilik əsasdır.",
+      "reliability": "Orta",
+      "freshProducts": [
+        "Vegetables",
+        "Fruits"
+      ],
+      "hasFreshProduce": true
+    },
+    {
+      "economicRegion": "Quba-Xaçmaz",
+      "district": "Siyəzən rayonu",
+      "directionRaw": "Üzüm; taxıl; tərəvəz",
+      "groupRaw": "üzüm/tərəvəz",
+      "rationale": "Quba-Xaçmaz mənbəsində Siyəzən üzrə üzüm qeyd olunur; aqrar profil daha qarışıqdır.",
+      "reliability": "Orta",
+      "freshProducts": [
+        "Vegetables"
+      ],
+      "hasFreshProduce": true
+    },
+    {
+      "economicRegion": "Şəki-Zaqatala",
+      "district": "Balakən rayonu",
+      "directionRaw": "Fındıq; qoz; meyvə",
+      "groupRaw": "qərzəkli/meyvə",
+      "rationale": "Şəki-Zaqatala zonasında qərzəkli meyvələr əsas sahədir; Balakən fındıq rayonları arasındadır.",
+      "reliability": "Yüksək",
+      "freshProducts": [
+        "Fruits"
+      ],
+      "hasFreshProduce": true
+    },
+    {
+      "economicRegion": "Şəki-Zaqatala",
+      "district": "Zaqatala rayonu",
+      "directionRaw": "Fındıq; qoz; meyvə; tütün",
+      "groupRaw": "qərzəkli/meyvə",
+      "rationale": "Ən böyük fındıq bağları sahəsi Zaqataladadır; regionda meyvəçilik də güclüdür.",
+      "reliability": "Yüksək",
+      "freshProducts": [
+        "Fruits"
+      ],
+      "hasFreshProduce": true
+    },
+    {
+      "economicRegion": "Şəki-Zaqatala",
+      "district": "Qax rayonu",
+      "directionRaw": "Fındıq; qoz; meyvə",
+      "groupRaw": "qərzəkli/meyvə",
+      "rationale": "Qax fındıq bağları üzrə əsas rayonlardan biri kimi qeyd olunur.",
+      "reliability": "Yüksək",
+      "freshProducts": [
+        "Fruits"
+      ],
+      "hasFreshProduce": true
+    },
+    {
+      "economicRegion": "Şəki-Zaqatala",
+      "district": "Şəki rayonu/şəhəri",
+      "directionRaw": "Fındıq; meyvə; tütün; taxıl",
+      "groupRaw": "qərzəkli/meyvə",
+      "rationale": "Şəki-Zaqatala regionunda Şəki meyvə, tütün və taxıl üzrə fərqlənir; fındıq aktiv əkilən rayonlardandır.",
+      "reliability": "Yüksək",
+      "freshProducts": [
+        "Fruits"
+      ],
+      "hasFreshProduce": true
+    },
+    {
+      "economicRegion": "Şəki-Zaqatala",
+      "district": "Oğuz rayonu",
+      "directionRaw": "Fındıq; meyvə; taxıl",
+      "groupRaw": "qərzəkli/meyvə",
+      "rationale": "Oğuz fındıq əkilən rayonlar sırasında göstərilir, region üzrə meyvəçilik əsasdır.",
+      "reliability": "Yüksək",
+      "freshProducts": [
+        "Fruits"
+      ],
+      "hasFreshProduce": true
+    },
+    {
+      "economicRegion": "Şəki-Zaqatala",
+      "district": "Qəbələ rayonu",
+      "directionRaw": "Fındıq; meyvə; taxıl",
+      "groupRaw": "qərzəkli/meyvə",
+      "rationale": "Qəbələ fındıq bağlarının aktiv əkildiyi rayonlar arasındadır; regionda meyvəçilik qeyd olunur.",
+      "reliability": "Yüksək",
+      "freshProducts": [
+        "Fruits"
+      ],
+      "hasFreshProduce": true
+    },
+    {
+      "economicRegion": "Dağlıq Şirvan",
+      "district": "Şamaxı rayonu",
+      "directionRaw": "Üzüm; meyvə; taxıl",
+      "groupRaw": "üzüm/meyvə",
+      "rationale": "Dağlıq Şirvan üzrə üzümçülük əsas sahədir; üzüm bağlarında Şamaxı böyük paya malikdir.",
+      "reliability": "Yüksək",
+      "freshProducts": [
+        "Fruits"
+      ],
+      "hasFreshProduce": true
+    },
+    {
+      "economicRegion": "Dağlıq Şirvan",
+      "district": "İsmayıllı rayonu",
+      "directionRaw": "Üzüm; meyvə; taxıl",
+      "groupRaw": "üzüm/meyvə",
+      "rationale": "Dağlıq Şirvan üçün üzümçülük və meyvəçilik uyğunlaşır; üzüm bağlarında İsmayıllı da qeyd olunur.",
+      "reliability": "Orta",
+      "freshProducts": [
+        "Fruits"
+      ],
+      "hasFreshProduce": true
+    },
+    {
+      "economicRegion": "Dağlıq Şirvan",
+      "district": "Ağsu rayonu",
+      "directionRaw": "Üzüm; taxıl; nar/heyva tipli quru-subtropik meyvələr",
+      "groupRaw": "üzüm/meyvə",
+      "rationale": "Dağlıq Şirvan üzrə üzümçülük və taxılçılıq əsasdır; Ağsu üçün konkret məhsul mənbəsi azdır.",
+      "reliability": "Orta",
+      "freshProducts": [
+        "Pomegranate",
+        "Citrus"
+      ],
+      "hasFreshProduce": true
+    },
+    {
+      "economicRegion": "Dağlıq Şirvan",
+      "district": "Qobustan rayonu",
+      "directionRaw": "Üzüm; taxıl; bostan-tərəvəz",
+      "groupRaw": "üzüm/taxıl/tərəvəz",
+      "rationale": "Dağlıq Şirvan üçün üzümçülük, taxılçılıq və heyvandarlıq əsas göstərilir; konkret tərəvəz brendi zəifdir.",
+      "reliability": "Orta",
+      "freshProducts": [
+        "Watermelon"
+      ],
+      "hasFreshProduce": true
+    },
+    {
+      "economicRegion": "Gəncə-Daşkəsən",
+      "district": "Gəncə şəhəri",
+      "directionRaw": "Üzüm; nar; tərəvəz; meyvə emalı",
+      "groupRaw": "meyvə/üzüm",
+      "rationale": "Gəncə-Qazax zonası üzümçülük və meyvə-tərəvəzlə tanınır; Gəncə daha çox şəhər/emal bazarıdır.",
+      "reliability": "Orta",
+      "freshProducts": [
+        "Pomegranate",
+        "Vegetables",
+        "Fruits"
+      ],
+      "hasFreshProduce": true
+    },
+    {
+      "economicRegion": "Gəncə-Daşkəsən",
+      "district": "Daşkəsən rayonu",
+      "directionRaw": "Kartof; taxıl; meyvəçilik məhdud",
+      "groupRaw": "kartof/taxıl",
+      "rationale": "Dağlıq şəraitə görə kartof və taxıl uyğun sayılır; konkret rəsmi məhsul brendi zəifdir.",
+      "reliability": "Aşağı-Orta",
+      "freshProducts": [
+        "Potato",
+        "Fruits"
+      ],
+      "hasFreshProduce": true
+    },
+    {
+      "economicRegion": "Gəncə-Daşkəsən",
+      "district": "Göygöl rayonu",
+      "directionRaw": "Üzüm; meyvə; kartof",
+      "groupRaw": "üzüm/meyvə",
+      "rationale": "Gəncə-Qazax üzümçülük zonasıdır; Göygöl üzümçülük ənənəsi olan rayon kimi qeyd olunur.",
+      "reliability": "Orta",
+      "freshProducts": [
+        "Fruits",
+        "Potato"
+      ],
+      "hasFreshProduce": true
+    },
+    {
+      "economicRegion": "Gəncə-Daşkəsən",
+      "district": "Goranboy rayonu",
+      "directionRaw": "Taxıl; pambıq; bostan-tərəvəz; meyvə",
+      "groupRaw": "tərəvəz/bostan",
+      "rationale": "Gəncə-Qazax mənbəsində Goranboy taxıl və pambıqla qeyd olunur; tərəvəz/bostan regionda mövcuddur.",
+      "reliability": "Orta",
+      "freshProducts": [
+        "Watermelon",
+        "Fruits"
+      ],
+      "hasFreshProduce": true
+    },
+    {
+      "economicRegion": "Gəncə-Daşkəsən",
+      "district": "Samux rayonu",
+      "directionRaw": "Üzüm; tərəvəz; meyvə; taxıl",
+      "groupRaw": "üzüm/tərəvəz",
+      "rationale": "Gəncə-Qazaxda üzüm yığımına görə Samux fərqlənir; üzüm bağlarında da Samux qeyd olunur.",
+      "reliability": "Yüksək",
+      "freshProducts": [
+        "Vegetables",
+        "Fruits"
+      ],
+      "hasFreshProduce": true
+    },
+    {
+      "economicRegion": "Gəncə-Daşkəsən",
+      "district": "Naftalan şəhəri",
+      "directionRaw": "Kənd təsərrüfatı profili zəif; kurort şəhəri",
+      "groupRaw": "-",
+      "rationale": "Naftalan aqrar məhsul brendi kimi deyil, kurort/müalicə nefti ilə tanınır.",
+      "reliability": "Aşağı",
+      "freshProducts": [],
+      "hasFreshProduce": false
+    },
+    {
+      "economicRegion": "Qazax-Tovuz",
+      "district": "Qazax rayonu",
+      "directionRaw": "Üzüm; taxıl; tərəvəz; bostan",
+      "groupRaw": "üzüm/tərəvəz",
+      "rationale": "Gəncə-Qazaxda üzüm yığımına görə Qazax fərqlənir.",
+      "reliability": "Yüksək",
+      "freshProducts": [
+        "Vegetables",
+        "Watermelon"
+      ],
+      "hasFreshProduce": true
+    },
+    {
+      "economicRegion": "Qazax-Tovuz",
+      "district": "Ağstafa rayonu",
+      "directionRaw": "Üzüm; kartof; taxıl; tərəvəz",
+      "groupRaw": "üzüm/kartof",
+      "rationale": "Gəncə-Qazaxda üzüm yığımına görə Ağstafa fərqlənir; kartof 2024 siyahısında da görünür.",
+      "reliability": "Yüksək",
+      "freshProducts": [
+        "Potato",
+        "Vegetables"
+      ],
+      "hasFreshProduce": true
+    },
+    {
+      "economicRegion": "Qazax-Tovuz",
+      "district": "Tovuz rayonu",
+      "directionRaw": "Kartof; üzüm; tərəvəz; meyvə",
+      "groupRaw": "kartof/üzüm",
+      "rationale": "Gəncə-Qazaxda kartof yığımına görə Tovuz fərqlənir; üzüm bağlarında da Tovuz qeyd olunur.",
+      "reliability": "Yüksək",
+      "freshProducts": [
+        "Potato",
+        "Vegetables",
+        "Fruits"
+      ],
+      "hasFreshProduce": true
+    },
+    {
+      "economicRegion": "Qazax-Tovuz",
+      "district": "Şəmkir rayonu",
+      "directionRaw": "Tərəvəz; pomidor; xiyar; kartof; üzüm",
+      "groupRaw": "tərəvəz/kartof/üzüm",
+      "rationale": "Şəmkir tərəvəz istehsalında lider kimi göstərilir; kartof və üzüm üzrə də fərqlənir.",
+      "reliability": "Yüksək",
+      "freshProducts": [
+        "Vegetables",
+        "Tomato",
+        "Cucumber",
+        "Potato"
+      ],
+      "hasFreshProduce": true
+    },
+    {
+      "economicRegion": "Qazax-Tovuz",
+      "district": "Gədəbəy rayonu",
+      "directionRaw": "Kartof; taxıl; meyvə",
+      "groupRaw": "kartof",
+      "rationale": "Gədəbəy kartofçuluqla məşğul olan əsas rayonlardan biridir; Gəncə-Qazaxda kartof yığımına görə fərqlənir.",
+      "reliability": "Yüksək",
+      "freshProducts": [
+        "Potato",
+        "Fruits"
+      ],
+      "hasFreshProduce": true
+    },
+    {
+      "economicRegion": "Qarabağ",
+      "district": "Ağdam rayonu",
+      "directionRaw": "Üzüm; taxıl; pambıq; meyvə; bostan-tərəvəz",
+      "groupRaw": "üzüm/meyvə/tərəvəz",
+      "rationale": "Qarabağ regionunda üzümçülük, taxılçılıq, pambıqçılıq və meyvə/bostan-tərəvəz qeyd olunur; Ağdam tarixi üzümçülük rayonudur.",
+      "reliability": "Orta",
+      "freshProducts": [
+        "Fruits",
+        "Watermelon"
+      ],
+      "hasFreshProduce": true
+    },
+    {
+      "economicRegion": "Qarabağ",
+      "district": "Füzuli rayonu",
+      "directionRaw": "Üzüm; taxıl; pambıq; meyvə; bostan-tərəvəz",
+      "groupRaw": "üzüm/meyvə/tərəvəz",
+      "rationale": "Qarabağ üzrə ümumi ixtisaslaşma: üzüm, taxıl, pambıq, meyvə və bostan-tərəvəz.",
+      "reliability": "Orta",
+      "freshProducts": [
+        "Fruits",
+        "Watermelon"
+      ],
+      "hasFreshProduce": true
+    },
+    {
+      "economicRegion": "Qarabağ",
+      "district": "Tərtər rayonu",
+      "directionRaw": "Taxıl; pambıq; tərəvəz; meyvə; üzüm",
+      "groupRaw": "tərəvəz/meyvə",
+      "rationale": "Qarabağ üzrə ümumi ixtisaslaşma ilə uyğunlaşdırılıb; Tərtər düzən əkinçilik rayonudur.",
+      "reliability": "Orta",
+      "freshProducts": [
+        "Vegetables",
+        "Fruits"
+      ],
+      "hasFreshProduce": true
+    },
+    {
+      "economicRegion": "Qarabağ",
+      "district": "Xocalı rayonu",
+      "directionRaw": "Meyvə; kartof; tərəvəz; taxıl",
+      "groupRaw": "meyvə/kartof",
+      "rationale": "Qarabağ dağlıq hissəsində meyvə və kartof/bostan-tərəvəz qeyd olunur; aktual istehsal məhduddur.",
+      "reliability": "Aşağı-Orta",
+      "freshProducts": [
+        "Fruits",
+        "Potato",
+        "Vegetables"
+      ],
+      "hasFreshProduce": true
+    },
+    {
+      "economicRegion": "Qarabağ",
+      "district": "Xocavənd rayonu",
+      "directionRaw": "Üzüm; meyvə; taxıl; tərəvəz",
+      "groupRaw": "üzüm/meyvə",
+      "rationale": "Qarabağ üzrə üzüm, meyvə və tərəvəz qeyd olunur; tarixi aqrar profil.",
+      "reliability": "Orta",
+      "freshProducts": [
+        "Fruits",
+        "Vegetables"
+      ],
+      "hasFreshProduce": true
+    },
+    {
+      "economicRegion": "Qarabağ",
+      "district": "Şuşa şəhəri/rayonu",
+      "directionRaw": "Meyvə; kartof; tərəvəzçilik məhdud",
+      "groupRaw": "meyvə/kartof",
+      "rationale": "Dağlıq iqlimə görə meyvə/kartof ehtimalı; şəhər kimi aqrar profil zəifdir.",
+      "reliability": "Aşağı",
+      "freshProducts": [
+        "Fruits",
+        "Potato",
+        "Vegetables"
+      ],
+      "hasFreshProduce": true
+    },
+    {
+      "economicRegion": "Şərqi Zəngəzur",
+      "district": "Cəbrayıl rayonu",
+      "directionRaw": "Üzüm; taxıl; pambıq; bostan-tərəvəz",
+      "groupRaw": "üzüm/tərəvəz",
+      "rationale": "Qarabağ mənbəsində Cəbrayıl daxil olduğu zonada üzüm, taxıl, pambıq, meyvə və bostan-tərəvəz qeyd olunur.",
+      "reliability": "Orta",
+      "freshProducts": [
+        "Watermelon"
+      ],
+      "hasFreshProduce": true
+    },
+    {
+      "economicRegion": "Şərqi Zəngəzur",
+      "district": "Zəngilan rayonu",
+      "directionRaw": "Üzüm; meyvə; taxıl; tərəvəz",
+      "groupRaw": "üzüm/meyvə",
+      "rationale": "Kəlbəcər-Laçın mənbəsində Zəngilan üçün üzümçülük, meyvəçilik və taxılçılıq ümumi sahələr kimi çıxır.",
+      "reliability": "Orta",
+      "freshProducts": [
+        "Fruits",
+        "Vegetables"
+      ],
+      "hasFreshProduce": true
+    },
+    {
+      "economicRegion": "Şərqi Zəngəzur",
+      "district": "Qubadlı rayonu",
+      "directionRaw": "Üzüm; meyvə; taxıl; tərəvəz",
+      "groupRaw": "üzüm/meyvə",
+      "rationale": "Kəlbəcər-Laçın zonası üçün üzümçülük, meyvəçilik və taxılçılıq qeyd edilir.",
+      "reliability": "Orta",
+      "freshProducts": [
+        "Fruits",
+        "Vegetables"
+      ],
+      "hasFreshProduce": true
+    },
+    {
+      "economicRegion": "Şərqi Zəngəzur",
+      "district": "Laçın rayonu",
+      "directionRaw": "Meyvə; kartof; taxıl; tərəvəzçilik məhdud",
+      "groupRaw": "meyvə/kartof",
+      "rationale": "Dağlıq zonada meyvəçilik, taxılçılıq, tütünçülük və üzümçülük qeyd olunur; kartof dağlıq şəraitə uyğun əlavə edilib.",
+      "reliability": "Aşağı-Orta",
+      "freshProducts": [
+        "Fruits",
+        "Potato",
+        "Vegetables"
+      ],
+      "hasFreshProduce": true
+    },
+    {
+      "economicRegion": "Şərqi Zəngəzur",
+      "district": "Kəlbəcər rayonu",
+      "directionRaw": "Kartof; taxıl; meyvə; tərəvəzçilik məhdud",
+      "groupRaw": "kartof/meyvə",
+      "rationale": "Dağlıq zonadır; mənbədə meyvəçilik və taxılçılıq qeyd edilir, kartof isə dağlıq əkinçilik üçün uyğun kimi daxil edilib.",
+      "reliability": "Aşağı-Orta",
+      "freshProducts": [
+        "Potato",
+        "Fruits",
+        "Vegetables"
+      ],
+      "hasFreshProduce": true
+    },
+    {
+      "economicRegion": "Mərkəzi Aran",
+      "district": "Ağdaş rayonu",
+      "directionRaw": "Bostan-tərəvəz; nar; heyva; quru-subtropik meyvələr",
+      "groupRaw": "tərəvəz/bostan/meyvə",
+      "rationale": "Aran zonasında dadlı bostan-tərəvəz və quru-subtropik meyvələr qeyd olunur; Ağdaş bu zonaya daxildir.",
+      "reliability": "Orta",
+      "freshProducts": [
+        "Watermelon",
+        "Pomegranate",
+        "Citrus"
+      ],
+      "hasFreshProduce": true
+    },
+    {
+      "economicRegion": "Mərkəzi Aran",
+      "district": "Göyçay rayonu",
+      "directionRaw": "Nar; meyvəçilik; tərəvəz",
+      "groupRaw": "nar/meyvə",
+      "rationale": "Göyçay respublika əhəmiyyətli meyvəçilik rayonu kimi göstərilir və narçılıqla bağlı rəsmi müşavirə mənbəsi var.",
+      "reliability": "Yüksək",
+      "freshProducts": [
+        "Pomegranate",
+        "Fruits",
+        "Vegetables"
+      ],
+      "hasFreshProduce": true
+    },
+    {
+      "economicRegion": "Mərkəzi Aran",
+      "district": "Ucar rayonu",
+      "directionRaw": "Bostan-tərəvəz; quru-subtropik meyvələr; taxıl",
+      "groupRaw": "tərəvəz/bostan/meyvə",
+      "rationale": "Aran zonası üçün bostan-tərəvəz və quru-subtropik meyvələr ixtisaslaşması götürülüb.",
+      "reliability": "Orta",
+      "freshProducts": [
+        "Watermelon",
+        "Citrus"
+      ],
+      "hasFreshProduce": true
+    },
+    {
+      "economicRegion": "Mərkəzi Aran",
+      "district": "Kürdəmir rayonu",
+      "directionRaw": "Üzüm; nar/heyva; bostan-tərəvəz; taxıl",
+      "groupRaw": "üzüm/meyvə/tərəvəz",
+      "rationale": "Aran zonasında üzümçülük, quru-subtropik meyvəçilik və bostançılıq qeyd olunur.",
+      "reliability": "Orta",
+      "freshProducts": [
+        "Pomegranate",
+        "Watermelon"
+      ],
+      "hasFreshProduce": true
+    },
+    {
+      "economicRegion": "Mərkəzi Aran",
+      "district": "Yevlax rayonu/şəhəri",
+      "directionRaw": "Taxıl; pambıq; bostan-tərəvəz; quru-subtropik meyvə",
+      "groupRaw": "tərəvəz/bostan",
+      "rationale": "Aran zonası üzrə ümumi ixtisaslaşma; şəhər hissəsində aqrar profil zəifdir.",
+      "reliability": "Orta",
+      "freshProducts": [
+        "Watermelon",
+        "Citrus"
+      ],
+      "hasFreshProduce": true
+    },
+    {
+      "economicRegion": "Mərkəzi Aran",
+      "district": "Mingəçevir şəhəri",
+      "directionRaw": "Kənd təsərrüfatı profili zəif; emal/sənaye şəhəri",
+      "groupRaw": "-",
+      "rationale": "Mingəçevir Aran regionunda olsa da daha çox energetika/sənaye şəhəridir.",
+      "reliability": "Aşağı",
+      "freshProducts": [],
+      "hasFreshProduce": false
+    },
+    {
+      "economicRegion": "Mil-Muğan",
+      "district": "Beyləqan rayonu",
+      "directionRaw": "Pambıq; taxıl; bostan-tərəvəz; nar/heyva",
+      "groupRaw": "tərəvəz/bostan/meyvə",
+      "rationale": "Aran/Kür-Araz zonası üzrə pambıq, taxıl, bostan-tərəvəz və quru-subtropik meyvələr əsasdır.",
+      "reliability": "Orta",
+      "freshProducts": [
+        "Watermelon",
+        "Pomegranate"
+      ],
+      "hasFreshProduce": true
+    },
+    {
+      "economicRegion": "Mil-Muğan",
+      "district": "İmişli rayonu",
+      "directionRaw": "Pambıq; şəkər çuğunduru; taxıl; bostan-tərəvəz",
+      "groupRaw": "tərəvəz/bostan",
+      "rationale": "Aran zonası ixtisaslaşması və İmişlinin düzən əkinçilik profili əsasında qeyd edilib.",
+      "reliability": "Orta",
+      "freshProducts": [
+        "Watermelon"
+      ],
+      "hasFreshProduce": true
+    },
+    {
+      "economicRegion": "Mil-Muğan",
+      "district": "Saatlı rayonu",
+      "directionRaw": "Pambıq; taxıl; bostan-tərəvəz",
+      "groupRaw": "tərəvəz/bostan",
+      "rationale": "Aran zonasında pambıqçılıq, taxılçılıq, bostançılıq ixtisaslaşmış sahələrdir.",
+      "reliability": "Orta",
+      "freshProducts": [
+        "Watermelon"
+      ],
+      "hasFreshProduce": true
+    },
+    {
+      "economicRegion": "Mil-Muğan",
+      "district": "Sabirabad rayonu",
+      "directionRaw": "Bostan məhsulları; kartof; tərəvəz; pambıq",
+      "groupRaw": "bostan/tərəvəz/kartof",
+      "rationale": "Aran ixtisaslaşması; 2024 kartof siyahısında Sabirabad da yüksək yığım göstərən rayon kimi çıxır.",
+      "reliability": "Yüksək-Orta",
+      "freshProducts": [
+        "Watermelon",
+        "Potato",
+        "Vegetables"
+      ],
+      "hasFreshProduce": true
+    },
+    {
+      "economicRegion": "Mil-Muğan",
+      "district": "Biləsuvar rayonu",
+      "directionRaw": "Pambıq; taxıl; bostan-tərəvəz",
+      "groupRaw": "tərəvəz/bostan",
+      "rationale": "Aran/Kür-Araz düzənliyi üzrə ixtisaslaşma: pambıq, taxıl, bostan-tərəvəz.",
+      "reliability": "Orta",
+      "freshProducts": [
+        "Watermelon"
+      ],
+      "hasFreshProduce": true
+    },
+    {
+      "economicRegion": "Şirvan-Salyan",
+      "district": "Salyan rayonu",
+      "directionRaw": "Üzüm; bostan-tərəvəz; taxıl; pambıq",
+      "groupRaw": "üzüm/tərəvəz/bostan",
+      "rationale": "Aran zonasında üzümçülük və bostan-tərəvəz qeyd olunur; üzüm bağlarında Salyan da pay sahibidir.",
+      "reliability": "Yüksək-Orta",
+      "freshProducts": [
+        "Watermelon"
+      ],
+      "hasFreshProduce": true
+    },
+    {
+      "economicRegion": "Şirvan-Salyan",
+      "district": "Neftçala rayonu",
+      "directionRaw": "Bostan-tərəvəz; taxıl; pambıq",
+      "groupRaw": "tərəvəz/bostan",
+      "rationale": "Aran zonası üzrə bostançılıq, tərəvəzçilik, taxıl və pambıq ixtisaslaşması götürülüb.",
+      "reliability": "Orta",
+      "freshProducts": [
+        "Watermelon"
+      ],
+      "hasFreshProduce": true
+    },
+    {
+      "economicRegion": "Şirvan-Salyan",
+      "district": "Hacıqabul rayonu",
+      "directionRaw": "Taxıl; bostan-tərəvəz; üzüm",
+      "groupRaw": "taxıl/tərəvəz",
+      "rationale": "Aran iqtisadi rayonunun ümumi ixtisaslaşması əsasında qeyd edilib.",
+      "reliability": "Orta",
+      "freshProducts": [
+        "Watermelon"
+      ],
+      "hasFreshProduce": true
+    },
+    {
+      "economicRegion": "Şirvan-Salyan",
+      "district": "Şirvan şəhəri",
+      "directionRaw": "Kənd təsərrüfatı profili zəif; sənaye/energetika",
+      "groupRaw": "-",
+      "rationale": "Şirvan daha çox sənaye/energetika mərkəzidir; kənd təsərrüfatı brendi zəifdir.",
+      "reliability": "Aşağı",
+      "freshProducts": [],
+      "hasFreshProduce": false
+    },
+    {
+      "economicRegion": "Lənkəran-Astara",
+      "district": "Lənkəran rayonu/şəhəri",
+      "directionRaw": "Çay; limon; naringi; portağal; faraş tərəvəz; çəltik",
+      "groupRaw": "sitrus/çay/tərəvəz",
+      "rationale": "Lənkəran-Astara üçün sitrus, çay və faraş tərəvəzçilik ixtisaslaşmış sahələrdir.",
+      "reliability": "Yüksək",
+      "freshProducts": [
+        "Citrus",
+        "Pomegranate",
+        "Vegetables"
+      ],
+      "hasFreshProduce": true
+    },
+    {
+      "economicRegion": "Lənkəran-Astara",
+      "district": "Astara rayonu",
+      "directionRaw": "Sitrus; limon; naringi; çay; tərəvəz",
+      "groupRaw": "sitrus/çay/tərəvəz",
+      "rationale": "Astara Lənkəran-Astara sitrus və çay zonası kimi göstərilir.",
+      "reliability": "Yüksək",
+      "freshProducts": [
+        "Citrus",
+        "Pomegranate",
+        "Vegetables"
+      ],
+      "hasFreshProduce": true
+    },
+    {
+      "economicRegion": "Lənkəran-Astara",
+      "district": "Masallı rayonu",
+      "directionRaw": "Çay; tərəvəz; sitrus; kartof",
+      "groupRaw": "çay/tərəvəz/sitrus",
+      "rationale": "Masallı çaybecərmə və tərəvəzçilik rayonlarından biri kimi qeyd olunur; sitrus zonasıdır.",
+      "reliability": "Yüksək",
+      "freshProducts": [
+        "Vegetables",
+        "Citrus",
+        "Potato"
+      ],
+      "hasFreshProduce": true
+    },
+    {
+      "economicRegion": "Lənkəran-Astara",
+      "district": "Cəlilabad rayonu",
+      "directionRaw": "Üzüm; kartof; tərəvəz; taxıl",
+      "groupRaw": "üzüm/kartof/tərəvəz",
+      "rationale": "Cəlilabad kartof yığımında yüksək göstərici ilə verilib; Lənkəran-Astara regionunda üzüm də becərilir.",
+      "reliability": "Yüksək",
+      "freshProducts": [
+        "Potato",
+        "Vegetables"
+      ],
+      "hasFreshProduce": true
+    },
+    {
+      "economicRegion": "Lənkəran-Astara",
+      "district": "Lerik rayonu",
+      "directionRaw": "Kartof; tərəvəz; meyvə; çay/tütün məhdud",
+      "groupRaw": "kartof/tərəvəz/meyvə",
+      "rationale": "Dağlıq-cənub zonası üçün meyvə-tərəvəz və yerli kartof uyğun gəlir; konkret rəsmi məhsul zəifdir.",
+      "reliability": "Aşağı-Orta",
+      "freshProducts": [
+        "Potato",
+        "Vegetables",
+        "Fruits"
+      ],
+      "hasFreshProduce": true
+    },
+    {
+      "economicRegion": "Lənkəran-Astara",
+      "district": "Yardımlı rayonu",
+      "directionRaw": "Kartof; tərəvəz; meyvə; taxıl",
+      "groupRaw": "kartof/tərəvəz/meyvə",
+      "rationale": "Dağlıq-cənub zonası üçün kartof, meyvə və tərəvəz qeyd edildi; mənbə ümumi region səviyyəsindədir.",
+      "reliability": "Aşağı-Orta",
+      "freshProducts": [
+        "Potato",
+        "Vegetables",
+        "Fruits"
+      ],
+      "hasFreshProduce": true
+    },
+    {
+      "economicRegion": "Naxçıvan",
+      "district": "Naxçıvan şəhəri",
+      "directionRaw": "Meyvə; üzüm; tərəvəz; gül; xına",
+      "groupRaw": "meyvə/üzüm/tərəvəz",
+      "rationale": "Naxçıvan MR üzrə üzümçülük, meyvəçilik və tərəvəzçilik əsas sahələrdir; şəhər hissəsi daha çox idarəetmə/sənaye mərkəzidir.",
+      "reliability": "Orta",
+      "freshProducts": [
+        "Fruits",
+        "Vegetables"
+      ],
+      "hasFreshProduce": true
+    },
+    {
+      "economicRegion": "Naxçıvan",
+      "district": "Şərur rayonu",
+      "directionRaw": "Üzüm; meyvə; tərəvəz; taxıl",
+      "groupRaw": "üzüm/meyvə/tərəvəz",
+      "rationale": "Naxçıvan MR üzrə üzümçülük, meyvəçilik və tərəvəzçilik əsas sahələr kimi qeyd olunur.",
+      "reliability": "Orta",
+      "freshProducts": [
+        "Fruits",
+        "Vegetables"
+      ],
+      "hasFreshProduce": true
+    },
+    {
+      "economicRegion": "Naxçıvan",
+      "district": "Babək rayonu",
+      "directionRaw": "Üzüm; tərəvəz; bostan; meyvə",
+      "groupRaw": "üzüm/tərəvəz/meyvə",
+      "rationale": "Naxçıvanın düzən sahələri meyvə və bostan-tərəvəz üçün əlverişli göstərilir.",
+      "reliability": "Orta",
+      "freshProducts": [
+        "Vegetables",
+        "Watermelon",
+        "Fruits"
+      ],
+      "hasFreshProduce": true
+    },
+    {
+      "economicRegion": "Naxçıvan",
+      "district": "Ordubad rayonu",
+      "directionRaw": "Meyvə; ərik; şaftalı; üzüm; konservlik meyvə",
+      "groupRaw": "meyvə/üzüm",
+      "rationale": "Naxçıvan üzrə meyvəçilik əsasdır; Ordubadda konserv sənayesi qeyd olunur.",
+      "reliability": "Orta",
+      "freshProducts": [
+        "Fruits"
+      ],
+      "hasFreshProduce": true
+    },
+    {
+      "economicRegion": "Naxçıvan",
+      "district": "Culfa rayonu",
+      "directionRaw": "Üzüm; meyvə; tərəvəz",
+      "groupRaw": "üzüm/meyvə/tərəvəz",
+      "rationale": "Naxçıvan MR ümumi ixtisaslaşması əsasında qeyd edilib.",
+      "reliability": "Orta",
+      "freshProducts": [
+        "Fruits",
+        "Vegetables"
+      ],
+      "hasFreshProduce": true
+    },
+    {
+      "economicRegion": "Naxçıvan",
+      "district": "Kəngərli rayonu",
+      "directionRaw": "Üzüm; bostan-tərəvəz; taxıl",
+      "groupRaw": "üzüm/tərəvəz/bostan",
+      "rationale": "Naxçıvanın isti düzən sahələri bostan-tərəvəz və üzüm üçün əlverişli göstərilir.",
+      "reliability": "Orta",
+      "freshProducts": [
+        "Watermelon"
+      ],
+      "hasFreshProduce": true
+    },
+    {
+      "economicRegion": "Naxçıvan",
+      "district": "Şahbuz rayonu",
+      "directionRaw": "Meyvə; tərəvəz; taxıl; kartof",
+      "groupRaw": "meyvə/tərəvəz/kartof",
+      "rationale": "Naxçıvan MR-də meyvəçilik və tərəvəzçilik əsasdır; dağlıq Şahbuz üçün kartof da uyğun kimi əlavə edilib.",
+      "reliability": "Aşağı-Orta",
+      "freshProducts": [
+        "Fruits",
+        "Vegetables",
+        "Potato"
+      ],
+      "hasFreshProduce": true
+    },
+    {
+      "economicRegion": "Naxçıvan",
+      "district": "Sədərək rayonu",
+      "directionRaw": "Üzüm; tərəvəz; taxıl",
+      "groupRaw": "üzüm/tərəvəz",
+      "rationale": "Naxçıvan MR ümumi ixtisaslaşması əsasında qeyd edilib.",
+      "reliability": "Orta",
+      "freshProducts": [
+        "Vegetables"
+      ],
+      "hasFreshProduce": true
+    },
+    {
+      "economicRegion": "Qarabağ/Aran",
+      "district": "Ağcabədi rayonu",
+      "directionRaw": "Pambıq; taxıl; bostan-tərəvəz; nar/heyva",
+      "groupRaw": "tərəvəz/bostan/meyvə",
+      "rationale": "Aran/Kür-Araz zonasında pambıq, taxıl, bostançılıq və quru-subtropik meyvəçilik ixtisaslaşmışdır.",
+      "reliability": "Orta",
+      "freshProducts": [
+        "Watermelon",
+        "Pomegranate"
+      ],
+      "hasFreshProduce": true
+    },
+    {
+      "economicRegion": "Mərkəzi Aran",
+      "district": "Bərdə rayonu",
+      "directionRaw": "Tərəvəz; pambıq; taxıl; meyvə",
+      "groupRaw": "tərəvəz/meyvə",
+      "rationale": "Sfera məlumatında Bərdə yüksək tərəvəz istehsalı olan rayonlar arasındadır.",
+      "reliability": "Yüksək",
+      "freshProducts": [
+        "Vegetables",
+        "Fruits"
+      ],
+      "hasFreshProduce": true
+    },
+    {
+      "economicRegion": "Mərkəzi Aran",
+      "district": "Zərdab rayonu",
+      "directionRaw": "Bostan-tərəvəz; taxıl; pambıq; quru-subtropik meyvələr",
+      "groupRaw": "tərəvəz/bostan/meyvə",
+      "rationale": "Aran zonası ixtisaslaşması əsasında qeyd edilib.",
+      "reliability": "Orta",
+      "freshProducts": [
+        "Watermelon",
+        "Citrus"
+      ],
+      "hasFreshProduce": true
+    }
+  ],
+  "regions": [
+    {
+      "name": "Abşeron-Xızı",
+      "districtCount": 3,
+      "freshDistrictCount": 2,
+      "topProducts": [
+        "Watermelon",
+        "Vegetables",
+        "Citrus",
+        "Fruits"
+      ],
+      "productCounts": {
+        "Vegetables": 1,
+        "Watermelon": 2,
+        "Citrus": 1,
+        "Fruits": 1
+      }
+    },
+    {
+      "name": "Bakı",
+      "districtCount": 1,
+      "freshDistrictCount": 1,
+      "topProducts": [
+        "Vegetables",
+        "Citrus"
+      ],
+      "productCounts": {
+        "Vegetables": 1,
+        "Citrus": 1
+      }
+    },
+    {
+      "name": "Dağlıq Şirvan",
+      "districtCount": 4,
+      "freshDistrictCount": 4,
+      "topProducts": [
+        "Fruits",
+        "Pomegranate",
+        "Citrus",
+        "Watermelon"
+      ],
+      "productCounts": {
+        "Fruits": 2,
+        "Pomegranate": 1,
+        "Citrus": 1,
+        "Watermelon": 1
+      }
+    },
+    {
+      "name": "Gəncə-Daşkəsən",
+      "districtCount": 6,
+      "freshDistrictCount": 5,
+      "topProducts": [
+        "Fruits",
+        "Vegetables",
+        "Potato",
+        "Pomegranate",
+        "Watermelon"
+      ],
+      "productCounts": {
+        "Pomegranate": 1,
+        "Vegetables": 2,
+        "Fruits": 5,
+        "Potato": 2,
+        "Watermelon": 1
+      }
+    },
+    {
+      "name": "Lənkəran-Astara",
+      "districtCount": 6,
+      "freshDistrictCount": 6,
+      "topProducts": [
+        "Vegetables",
+        "Potato",
+        "Citrus",
+        "Pomegranate",
+        "Fruits"
+      ],
+      "productCounts": {
+        "Citrus": 3,
+        "Pomegranate": 2,
+        "Vegetables": 6,
+        "Potato": 4,
+        "Fruits": 2
+      }
+    },
+    {
+      "name": "Mil-Muğan",
+      "districtCount": 5,
+      "freshDistrictCount": 5,
+      "topProducts": [
+        "Watermelon",
+        "Pomegranate",
+        "Potato",
+        "Vegetables"
+      ],
+      "productCounts": {
+        "Watermelon": 5,
+        "Pomegranate": 1,
+        "Potato": 1,
+        "Vegetables": 1
+      }
+    },
+    {
+      "name": "Mərkəzi Aran",
+      "districtCount": 8,
+      "freshDistrictCount": 7,
+      "topProducts": [
+        "Watermelon",
+        "Citrus",
+        "Pomegranate",
+        "Fruits",
+        "Vegetables"
+      ],
+      "productCounts": {
+        "Watermelon": 5,
+        "Pomegranate": 3,
+        "Citrus": 4,
+        "Fruits": 2,
+        "Vegetables": 2
+      }
+    },
+    {
+      "name": "Naxçıvan",
+      "districtCount": 8,
+      "freshDistrictCount": 8,
+      "topProducts": [
+        "Fruits",
+        "Vegetables",
+        "Watermelon",
+        "Potato"
+      ],
+      "productCounts": {
+        "Fruits": 6,
+        "Vegetables": 6,
+        "Watermelon": 2,
+        "Potato": 1
+      }
+    },
+    {
+      "name": "Qarabağ",
+      "districtCount": 6,
+      "freshDistrictCount": 6,
+      "topProducts": [
+        "Fruits",
+        "Vegetables",
+        "Watermelon",
+        "Potato"
+      ],
+      "productCounts": {
+        "Fruits": 6,
+        "Watermelon": 2,
+        "Vegetables": 4,
+        "Potato": 2
+      }
+    },
+    {
+      "name": "Qarabağ/Aran",
+      "districtCount": 1,
+      "freshDistrictCount": 1,
+      "topProducts": [
+        "Watermelon",
+        "Pomegranate"
+      ],
+      "productCounts": {
+        "Watermelon": 1,
+        "Pomegranate": 1
+      }
+    },
+    {
+      "name": "Qazax-Tovuz",
+      "districtCount": 5,
+      "freshDistrictCount": 5,
+      "topProducts": [
+        "Vegetables",
+        "Potato",
+        "Fruits",
+        "Watermelon",
+        "Tomato"
+      ],
+      "productCounts": {
+        "Vegetables": 4,
+        "Watermelon": 1,
+        "Potato": 4,
+        "Fruits": 2,
+        "Tomato": 1,
+        "Cucumber": 1
+      }
+    },
+    {
+      "name": "Quba-Xaçmaz",
+      "districtCount": 5,
+      "freshDistrictCount": 5,
+      "topProducts": [
+        "Vegetables",
+        "Fruits",
+        "Apple",
+        "Pear",
+        "Cherry"
+      ],
+      "productCounts": {
+        "Apple": 2,
+        "Pear": 1,
+        "Cherry": 1,
+        "Fruits": 3,
+        "Vegetables": 4,
+        "Potato": 1
+      }
+    },
+    {
+      "name": "Şirvan-Salyan",
+      "districtCount": 4,
+      "freshDistrictCount": 3,
+      "topProducts": [
+        "Watermelon"
+      ],
+      "productCounts": {
+        "Watermelon": 3
+      }
+    },
+    {
+      "name": "Şəki-Zaqatala",
+      "districtCount": 6,
+      "freshDistrictCount": 6,
+      "topProducts": [
+        "Fruits"
+      ],
+      "productCounts": {
+        "Fruits": 6
+      }
+    },
+    {
+      "name": "Şərqi Zəngəzur",
+      "districtCount": 5,
+      "freshDistrictCount": 5,
+      "topProducts": [
+        "Fruits",
+        "Vegetables",
+        "Potato",
+        "Watermelon"
+      ],
+      "productCounts": {
+        "Watermelon": 1,
+        "Fruits": 4,
+        "Vegetables": 4,
+        "Potato": 2
+      }
+    }
+  ]
+}

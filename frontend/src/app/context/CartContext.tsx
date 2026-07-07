@@ -1,0 +1,340 @@
+import {
+  createContext,
+  useCallback,
+  useContext,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+  type ReactNode,
+} from "react";
+import { CheckCircle2, XCircle } from "lucide-react";
+import { useAuth } from "../auth/AuthContext";
+import { getProductBySlug, type HarvestListing } from "../data/harvestExplorer";
+import { isApiMode } from "../../config/dataMode";
+import {
+  addCartItemApi,
+  clearCartApi,
+  getCartItemsApi,
+  removeCartItemApi,
+  type ApiCartItem,
+  updateCartItemApi,
+} from "../../api/cartApi";
+import {
+  addOrUpdateCartItem,
+  cartItemFromListing,
+  cartItemFromSavedProduct,
+  clearCart,
+  getCartItems,
+  removeCartItem,
+  updateCartItemQuantity,
+  CART_CHANGED_EVENT,
+  type CartItem,
+} from "../utils/cartStorage";
+import type { SavedProduct } from "../utils/savedProductsStorage";
+
+export type CartAddOutcome = "added" | "quantity_updated" | "already_at_max";
+
+export type CartActionResult =
+  | { ok: true; message: string; count: number; outcome: CartAddOutcome }
+  | { ok: false; message: string };
+
+interface CartToast {
+  message: string;
+  variant: "success" | "error";
+}
+
+interface CartContextValue {
+  cartItems: CartItem[];
+  cartCount: number;
+  addListingToCart: (listing: HarvestListing) => CartActionResult;
+  addSavedToCart: (product: SavedProduct) => CartActionResult;
+  addSlugToCart: (slug: string) => CartActionResult;
+  removeFromCart: (slug: string) => void;
+  updateQuantity: (slug: string, quantity: number) => void;
+  clearBuyerCart: () => void;
+  toast: CartToast | null;
+  showCartToast: (message: string, variant?: "success" | "error") => void;
+  isInCart: (slug: string) => boolean;
+}
+
+const CartContext = createContext<CartContextValue | null>(null);
+
+const OUTCOME_MESSAGES: Record<CartAddOutcome, string> = {
+  added: "Product added to cart",
+  quantity_updated: "Quantity updated in cart",
+  already_at_max: "This product is already in your cart",
+};
+
+export function CartProvider({ children }: { children: ReactNode }) {
+  const { user, isAuthenticated } = useAuth();
+  const [cartItems, setCartItems] = useState<CartItem[]>([]);
+  const [toast, setToast] = useState<CartToast | null>(null);
+  const toastTimerRef = useRef<number | null>(null);
+
+  const refresh = useCallback(() => {
+    if (!user?.id) {
+      setCartItems([]);
+      return;
+    }
+    if (isApiMode) {
+      getCartItemsApi()
+        .then((items) => setCartItems(items.map(mapApiCartItemToCartItem)))
+        .catch(() => setCartItems([]));
+      return;
+    }
+    setCartItems(getCartItems(user.id));
+  }, [user?.id]);
+
+  useEffect(() => {
+    refresh();
+  }, [refresh]);
+
+  useEffect(() => {
+    const handleChange = () => refresh();
+    window.addEventListener(CART_CHANGED_EVENT, handleChange);
+    window.addEventListener("storage", handleChange);
+    return () => {
+      window.removeEventListener(CART_CHANGED_EVENT, handleChange);
+      window.removeEventListener("storage", handleChange);
+    };
+  }, [refresh]);
+
+  const showCartToast = useCallback((message: string, variant: "success" | "error" = "success") => {
+    if (toastTimerRef.current) {
+      window.clearTimeout(toastTimerRef.current);
+    }
+    setToast({ message, variant });
+    toastTimerRef.current = window.setTimeout(() => {
+      setToast(null);
+      toastTimerRef.current = null;
+    }, 3000);
+  }, []);
+
+  const guardBuyer = useCallback((): CartActionResult | null => {
+    if (!isAuthenticated || !user) {
+      return { ok: false, message: "Please log in as a buyer to add items to cart." };
+    }
+    if (user.role !== "buyer") {
+      return { ok: false, message: "Only buyers can add products to cart." };
+    }
+    return null;
+  }, [isAuthenticated, user]);
+
+  const runGuarded = useCallback(
+    (action: () => CartActionResult): CartActionResult => {
+      const blocked = guardBuyer();
+      if (blocked) {
+        showCartToast(blocked.message, "error");
+        return blocked;
+      }
+      try {
+        return action();
+      } catch {
+        const failure: CartActionResult = {
+          ok: false,
+          message: "Could not add product to cart. Please try again.",
+        };
+        showCartToast(failure.message, "error");
+        return failure;
+      }
+    },
+    [guardBuyer, showCartToast],
+  );
+
+  const processAdd = useCallback(
+    (base: Omit<CartItem, "selectedQuantity" | "addedAt">): CartActionResult => {
+      if (isApiMode) {
+        addCartItemApi(base.id, base.minimumOrder)
+          .then((item) =>
+            setCartItems((prev) => {
+              const mapped = mapApiCartItemToCartItem(item);
+              const existing = prev.find((i) => i.slug === mapped.slug);
+              if (existing) {
+                return prev.map((i) => (i.slug === mapped.slug ? mapped : i));
+              }
+              return [mapped, ...prev];
+            }),
+          )
+          .catch(() => showCartToast("Could not add product to cart. Please try again.", "error"));
+        const message = OUTCOME_MESSAGES.added;
+        showCartToast(message, "success");
+        return { ok: true, message, count: cartItems.length + 1, outcome: "added" };
+      }
+      const { items, outcome } = addOrUpdateCartItem(user!.id, base);
+      setCartItems(items);
+      const message = OUTCOME_MESSAGES[outcome];
+      showCartToast(message, outcome === "already_at_max" ? "error" : "success");
+      return { ok: true, message, count: items.length, outcome };
+    },
+    [showCartToast, user],
+  );
+
+  const addListingToCart = useCallback(
+    (listing: HarvestListing): CartActionResult =>
+      runGuarded(() => processAdd(cartItemFromListing(listing))),
+    [processAdd, runGuarded],
+  );
+
+  const addSavedToCart = useCallback(
+    (product: SavedProduct): CartActionResult =>
+      runGuarded(() => processAdd(cartItemFromSavedProduct(product))),
+    [processAdd, runGuarded],
+  );
+
+  const addSlugToCart = useCallback(
+    (slug: string): CartActionResult => {
+      const listing = getProductBySlug(slug);
+      if (!listing) {
+        const failure: CartActionResult = {
+          ok: false,
+          message: "Could not add product to cart. Please try again.",
+        };
+        showCartToast(failure.message, "error");
+        return failure;
+      }
+      return addListingToCart(listing);
+    },
+    [addListingToCart, showCartToast],
+  );
+
+  const removeFromCart = useCallback(
+    (slug: string) => {
+      if (!user?.id) return;
+      if (isApiMode) {
+        removeCartItemApi(slug)
+          .then(() => {
+            setCartItems((prev) => prev.filter((item) => item.slug !== slug));
+            showCartToast("Item removed from cart");
+          })
+          .catch(() => showCartToast("Could not remove item from cart.", "error"));
+        return;
+      }
+      const next = removeCartItem(user.id, slug);
+      setCartItems(next);
+      showCartToast("Item removed from cart");
+    },
+    [showCartToast, user?.id],
+  );
+
+  const updateQuantity = useCallback(
+    (slug: string, quantity: number) => {
+      if (!user?.id) return;
+      if (isApiMode) {
+        updateCartItemApi(slug, quantity)
+          .then((item) =>
+            setCartItems((prev) =>
+              prev.map((entry) => (entry.slug === slug ? mapApiCartItemToCartItem(item) : entry)),
+            ),
+          )
+          .catch(() => showCartToast("Could not update cart item.", "error"));
+        return;
+      }
+      const next = updateCartItemQuantity(user.id, slug, quantity);
+      setCartItems(next);
+    },
+    [user?.id, showCartToast],
+  );
+
+  const clearBuyerCart = useCallback(() => {
+    if (!user?.id) return;
+    if (isApiMode) {
+      clearCartApi()
+        .then(() => setCartItems([]))
+        .catch(() => showCartToast("Could not clear cart.", "error"));
+      return;
+    }
+    clearCart(user.id);
+    setCartItems([]);
+  }, [user?.id, showCartToast]);
+
+  const isInCart = useCallback(
+    (slug: string) => cartItems.some((item) => item.slug === slug),
+    [cartItems],
+  );
+
+  const value = useMemo(
+    () => ({
+      cartItems,
+      cartCount: cartItems.length,
+      addListingToCart,
+      addSavedToCart,
+      addSlugToCart,
+      removeFromCart,
+      updateQuantity,
+      clearBuyerCart,
+      toast,
+      showCartToast,
+      isInCart,
+    }),
+    [
+      cartItems,
+      addListingToCart,
+      addSavedToCart,
+      addSlugToCart,
+      removeFromCart,
+      updateQuantity,
+      clearBuyerCart,
+      toast,
+      showCartToast,
+      isInCart,
+    ],
+  );
+
+  return (
+    <CartContext.Provider value={value}>
+      {children}
+      {toast ? (
+        <div
+          className={`agrivo-cart-toast agrivo-cart-toast--${toast.variant}`}
+          role="status"
+          aria-live="polite"
+        >
+          {toast.variant === "success" ? (
+            <CheckCircle2 className="h-4 w-4 shrink-0" />
+          ) : (
+            <XCircle className="h-4 w-4 shrink-0" />
+          )}
+          <span>{toast.message}</span>
+        </div>
+      ) : null}
+    </CartContext.Provider>
+  );
+}
+
+export function useCart(): CartContextValue {
+  const context = useContext(CartContext);
+  if (!context) {
+    throw new Error("useCart must be used within a CartProvider");
+  }
+  return context;
+}
+
+function mapApiCartItemToCartItem(item: ApiCartItem): CartItem {
+  const unit = item.product.unit || "kg";
+  const quantity = item.product.quantity ?? 0;
+  const pricePerUnit = item.product.price ?? 0;
+  const location = `${item.product.region ?? "Azerbaijan"} > ${item.product.district ?? "District"}${
+    item.product.village ? ` > ${item.product.village}` : ""
+  }`;
+  return {
+    id: item.product.id,
+    slug: item.id,
+    name: item.product.name,
+    category: item.product.category,
+    image: item.product.imageUrl ?? "",
+    farmer: item.product.farmer?.name ?? "Farmer",
+    farmerSlug: item.product.farmer?.id ?? null,
+    location,
+    price: `${pricePerUnit} AZN`,
+    unit,
+    availableQuantity: quantity,
+    availableQuantityLabel: `${quantity} ${unit}`,
+    selectedQuantity: item.quantity,
+    deliveryAvailable: true,
+    minimumOrder: 1,
+    step: 1,
+    pricePerUnit,
+    addedAt: new Date().toISOString(),
+  };
+}

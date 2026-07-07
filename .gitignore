@@ -1,0 +1,126 @@
+# =========================
+# Dependencies
+# =========================
+node_modules/
+frontend/node_modules/
+backend/node_modules/
+
+# =========================
+# Vite / production build
+# =========================
+dist/
+frontend/dist/
+backend/dist/
+dist-ssr/
+frontend/dist-ssr/
+*.local
+
+# Vite dependency pre-bundling cache
+.vite/
+frontend/.vite/
+vite.config.ts.timestamp-*
+vite.config.js.timestamp-*
+
+# =========================
+# Environment variables & secrets
+# =========================
+.env
+.env.*
+!**/.env.example
+!.env.example
+
+frontend/.env
+backend/.env
+
+# =========================
+# Logs & debug output
+# =========================
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+scripts/check-out.txt
+agrivo-vite.log
+vite.log
+
+# =========================
+# OS-generated files
+# =========================
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# =========================
+# Editors & IDEs
+# =========================
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Cursor / Codex / local agent tooling
+.cursor/
+.agents/
+.codex/
+
+# =========================
+# Package manager caches
+# =========================
+.npm/
+.pnpm-store/
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/versions
+.pnp.*
+
+# =========================
+# Python (scripts/)
+# =========================
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+venv/
+env/
+.pytest_cache/
+.mypy_cache/
+*.egg-info/
+
+# =========================
+# Testing & coverage
+# =========================
+coverage/
+.nyc_output/
+
+# =========================
+# TypeScript
+# =========================
+*.tsbuildinfo
+
+# =========================
+# Temporary / cache files
+# =========================
+*.tmp
+*.temp
+*~
+.cache/
+
+# =========================
+# Optional: script scratch data
+# =========================
+scripts/data/
