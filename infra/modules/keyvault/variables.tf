@@ -39,3 +39,11 @@ variable "tags" {
   type        = map(string)
   default     = {}
 }
+
+
+
+variable "secrets" {
+  description = "Map of secrets to store in Azure Key Vault."
+  type        = map(string)
+  default     = {}
+}
