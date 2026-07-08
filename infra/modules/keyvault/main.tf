@@ -32,3 +32,17 @@ resource "azurerm_key_vault_access_policy" "admin" {
     "Purge"
   ]
 }
+
+resource "azurerm_key_vault_secret" "this" {
+  for_each = var.secrets
+
+  name         = each.key
+  value        = each.value
+  key_vault_id = azurerm_key_vault.this.id
+
+  depends_on = [
+    azurerm_key_vault_access_policy.admin
+  ]
+
+  tags = var.tags
+}

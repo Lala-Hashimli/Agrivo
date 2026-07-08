@@ -90,3 +90,15 @@ variable "postgres_storage_mb" {
   description = "PostgreSQL storage size in MB."
   type        = number
 }
+
+variable "database_url" {
+  description = "Application database connection string stored in Key Vault."
+  type        = string
+  sensitive   = true
+}
+
+variable "jwt_secret" {
+  description = "JWT signing secret stored in Key Vault."
+  type        = string
+  sensitive   = true
+}

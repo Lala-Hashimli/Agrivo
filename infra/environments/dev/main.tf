@@ -36,8 +36,15 @@ module "keyvault" {
   resource_group_name = module.network.resource_group_name
   tenant_id           = var.tenant_id
   admin_object_id     = var.admin_object_id
-  tags                = var.tags
+
+  secrets = {
+    DATABASE_URL = var.database_url
+    JWT_SECRET   = var.jwt_secret
+  }
+
+  tags = var.tags
 }
+
 
 module "database" {
   source = "../../modules/database"
