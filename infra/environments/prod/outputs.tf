@@ -37,3 +37,18 @@ output "key_vault_uri" {
   description = "URI of the prod Key Vault."
   value       = module.keyvault.key_vault_uri
 }
+
+output "postgres_server_name" {
+  description = "Name of the prod PostgreSQL server."
+  value       = module.database.postgres_server_name
+}
+
+output "postgres_server_fqdn" {
+  description = "FQDN of the prod PostgreSQL server."
+  value       = module.database.postgres_server_fqdn
+}
+
+output "database_name" {
+  description = "Name of the prod application database."
+  value       = module.database.database_name
+}

@@ -69,3 +69,25 @@ variable "admin_object_id" {
   description = "Object ID of the admin user or group for Key Vault access."
   type        = string
 }
+
+
+variable "postgres_admin_username" {
+  description = "PostgreSQL administrator username."
+  type        = string
+}
+
+variable "postgres_admin_password" {
+  description = "PostgreSQL administrator password."
+  type        = string
+  sensitive   = true
+}
+
+variable "postgres_sku_name" {
+  description = "PostgreSQL Flexible Server SKU."
+  type        = string
+}
+
+variable "postgres_storage_mb" {
+  description = "PostgreSQL storage size in MB."
+  type        = number
+}

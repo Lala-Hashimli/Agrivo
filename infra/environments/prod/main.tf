@@ -38,3 +38,17 @@ module "keyvault" {
   admin_object_id     = var.admin_object_id
   tags                = var.tags
 }
+
+module "database" {
+  source = "../../modules/database"
+
+  project_name            = var.project_name
+  environment             = var.environment
+  location                = var.location
+  resource_group_name     = module.network.resource_group_name
+  postgres_admin_username = var.postgres_admin_username
+  postgres_admin_password = var.postgres_admin_password
+  postgres_sku_name       = var.postgres_sku_name
+  postgres_storage_mb     = var.postgres_storage_mb
+  tags                    = var.tags
+}
