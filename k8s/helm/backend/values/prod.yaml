@@ -42,3 +42,11 @@ keyVault:
     - objectName: JWT_SECRET
       objectType: secret
       envName: JWT_SECRETxy
+monitoring:
+  enabled: true
+  interval: 15s
+  scrapeTimeout: 10s
+  labels:
+    release: kube-prometheus-stack
+  alerts:
+    enabled: true
