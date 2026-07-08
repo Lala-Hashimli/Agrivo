@@ -1,0 +1,15 @@
+environment  = "prod"
+location     = "westeurope"
+project_name = "agrivo"
+
+address_space = ["10.20.0.0/16"]
+
+aks_subnet_address_prefixes = ["10.20.1.0/24"]
+
+private_endpoint_subnet_address_prefixes = ["10.20.2.0/24"]
+
+tags = {
+  project     = "agrivo"
+  environment = "prod"
+  managed_by  = "terraform"
+}
