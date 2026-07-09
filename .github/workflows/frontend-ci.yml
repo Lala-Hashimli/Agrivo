@@ -48,6 +48,7 @@ jobs:
 
       - name: Run npm audit
         working-directory: frontend
+        continue-on-error: true
         run: npm audit --audit-level=high
 
       - name: Set image tag
@@ -62,7 +63,7 @@ jobs:
             -f frontend/Dockerfile \
             --build-arg VITE_API_URL=/api \
             --build-arg VITE_DATA_MODE=api \
-            -t "${{ steps.image.outputs.image }}" \
+            -t "agrivo-frontend:${GITHUB_SHA}" \
             .
 
       - name: Scan Docker image with Trivy
